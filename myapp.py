@@ -7,9 +7,12 @@ app = Flask(__name__)
 def mypage():
     if request.method == "POST":
         name = request.form["name"]
-        bday = int(request.form["bday"])  
+        bday = request.form["bday"]  
+        
+        birth_date = datetime.strptime(bday, "%Y-%m-%d")
+
         current_year = datetime.now().year
-        age = current_year - bday  
+        age = current_year - birth_date.year - ((current_year, birth_date.month, birth_date.day) < (current_year, birth_date.month, birth_date.day))
 
         return jsonify({"name": name, "age": age})
     else:
