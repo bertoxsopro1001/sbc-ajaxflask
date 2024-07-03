@@ -4,36 +4,40 @@
     <meta charset="UTF-8">
     <title></title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            background-color: gold;
+        }
+    </style>
 </head>
 <body>
-    <h1>Enter your name and birth year</h1>
+    <h1></h1>
     <form id="ageForm">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
-        <label for="birth_year">Birth Year:</label>
-        <input type="number" id="birth_year" name="bday" required><br><br>
+        <label for="birth_date">Birth Date:</label>
+        <input type="date" id="birth_date" name="bday" required><br><br>
         <input type="button" value="Display" id="displayBtn">
     </form>
     <div id="result"></div>
 
     <script>
         $(document).ready(function() {
-    $('#displayBtn').click(function() {
-        var formData = $('#ageForm').serialize();
+            $('#displayBtn').click(function() {
+                var formData = $('#ageForm').serialize();
 
-        $.ajax({
-            url: '/mypage',
-            type: 'POST',
-            data: formData,
-            success: function(response) {
-                var name = response.name;
-                var age = response.age;
-                $('#result').html('<h2>Name: ' +name + '</h2><h2>Age: ' + age + '</h2>');
-            }
+                $.ajax({
+                    url: '/mypage',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        var name = response.name;
+                        var age = response.age;
+                        $('#result').html('<h2>Name: ' + name + '</h2><h2>Age: ' + age + '</h2>');
+                    }
+                });
+            });
         });
-    });
-});
-     
     </script>
 </body>
 </html>
